@@ -53,3 +53,36 @@ WHERE NOT EXISTS (
   FROM empresa_asociada e
   WHERE ST_Distance(c.ubicacion_cliente, e.ubicacion_empresa_asociada) <= 0.045
 );
+
+
+
+-- ##### EXTRAS ##### 
+
+
+-- extra 1. Implementar una función que calcule automáticamente la zona a la que pertenece un cliente.
+SELECT z.id_zona, z.nombre, z.tipo
+FROM ZONA_COBERTURA z
+JOIN CLIENTE c ON c.id_cliente = 5
+WHERE ST_Within(c.ubicacion_cliente, z.zona_geom);
+
+-- extra 2. Detectar zonas con alta densidad de pedidos mediante agregación de puntos.
+WITH zona_pedidos AS (
+  SELECT 
+    z.id_zona,
+    z.nombre,
+    ST_Collect(p.ubicacion_entrega) AS pedidos_agrupados
+  FROM ZONA_COBERTURA z
+  JOIN PEDIDO p ON ST_Within(p.ubicacion_entrega, z.zona_geom)
+  GROUP BY z.id_zona, z.nombre
+)
+SELECT 
+  zp.id_zona,
+  zp.nombre,
+  COUNT(p.id_pedido) AS pedidos_en_buffer
+FROM zona_pedidos zp
+JOIN PEDIDO p ON ST_Intersects(
+    ST_Buffer(zp.pedidos_agrupados::geography, 500)::geometry,
+    p.ubicacion_entrega
+  )
+GROUP BY zp.id_zona, zp.nombre
+ORDER BY pedidos_en_buffer DESC;
