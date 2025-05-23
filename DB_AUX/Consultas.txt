@@ -18,6 +18,18 @@ ORDER BY
     distancia_metros ASC
 LIMIT 5;
 
+-- 2. Determinar si un cliente se encuentra dentro de una zona de cobertura.
+SELECT
+  c.id_cliente,
+  c.nombre,
+  CASE
+    WHEN ST_Within(c.ubicacion_cliente, z.zona_geom) THEN 'Dentro de la zona'
+    ELSE 'Fuera de la zona'
+  END AS estado
+FROM cliente c
+JOIN zona_cobertura z
+  ON z.id_zona = 3
+
 -- 4. Identificar el punto de entrega más lejano desde cada empresa asociada.
 SELECT 
   e.id_empresa_asociada,
@@ -30,4 +42,14 @@ JOIN PEDIDO p ON p.id_pedido = (
   FROM PEDIDO p2
   ORDER BY ST_Distance(e.ubicacion_empresa_asociada, p2.ubicacion_entrega) DESC
   LIMIT 1
+);
+
+--6. Determinar los clientes que están a más de 5km de cualquier empresa o farmacia. (Como están las distancias en grados, 5 km ≈ 0.045 grados.
+
+SELECT c.id_cliente, c.nombre
+FROM cliente c
+WHERE NOT EXISTS (
+  SELECT 1
+  FROM empresa_asociada e
+  WHERE ST_Distance(c.ubicacion_cliente, e.ubicacion_empresa_asociada) <= 0.045
 );
