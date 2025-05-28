@@ -5,8 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.awt.Point;
 import java.sql.Date;
 import java.time.LocalDate;
+import org.locationtech.jts.geom.*;
+
 
 @Data
 @AllArgsConstructor
@@ -22,4 +25,6 @@ public class PedidoEntity {
     private Long id_cliente;
     private Long id_medio_pago;
     private LocalDate deleted_at;
+    private Point ubicacion_entrega;
+    private LineString ruta_estimada;
 }

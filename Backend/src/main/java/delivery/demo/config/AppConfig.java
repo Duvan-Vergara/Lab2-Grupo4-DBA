@@ -57,7 +57,7 @@ public class AppConfig {
 
     @Bean
     public Sql2o sql2o(
-            @Value("jdbc:postgresql://localhost:5432/tbd") String dbUrl,
+            @Value("jdbc:postgresql://localhost:5432/tbd2") String dbUrl,
             @Value("${DB_USER}") String dbUser,
             @Value("${DB_PASSWORD}") String dbPass
     ) {

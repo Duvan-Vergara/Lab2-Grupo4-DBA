@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.awt.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -26,4 +27,5 @@ public class ClienteEntity {
     private String password;
 
     private LocalDate deleted_at;
+    private Point ubicacion_cliente;
 }

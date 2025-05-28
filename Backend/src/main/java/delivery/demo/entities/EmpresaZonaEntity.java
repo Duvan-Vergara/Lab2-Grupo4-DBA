@@ -1,19 +1,15 @@
 package delivery.demo.entities;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.awt.*;
-import java.time.LocalDate;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmpresaAsociadaEntity {
+public class EmpresaZonaEntity {
+    private Long id_empresa_zona;
     private Long id_empresa_asociada;
-
-    private String nombre;
-    private LocalDate deleted_at;
-    private Point ubicacion_empresa_asociada;
+    private Long id_zona;
 }

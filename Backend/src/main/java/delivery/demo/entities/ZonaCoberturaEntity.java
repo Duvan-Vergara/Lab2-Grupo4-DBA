@@ -5,15 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.awt.*;
-import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmpresaAsociadaEntity {
-    private Long id_empresa_asociada;
-
+public class ZonaCoberturaEntity {
+    private Long id_zona;
     private String nombre;
-    private LocalDate deleted_at;
-    private Point ubicacion_empresa_asociada;
+    private String tipo;
+    private Polygon zona_geom;
 }

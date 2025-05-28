@@ -22,8 +22,8 @@ public class TokenSevice {
 
     public TokenResponse register(final RegisterRequest request) {
         var cliente = ClienteEntity.builder()
-                .nombre(request.name())
-                .correo(request.email())
+                .nombre(request.nombre())
+                .correo(request.correo())
                 .direccion(request.direccion())
                 .password(passwordEncoder.encode(request.password()))
                 .build();

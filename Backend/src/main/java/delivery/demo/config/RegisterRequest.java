@@ -1,8 +1,11 @@
 package delivery.demo.config;
 
+import java.awt.*;
+
 public record RegisterRequest(
-        String name,
+        String nombre,
         String direccion,
-        String email,
-        String password
+        String correo,
+        String password,
+        Point ubicacion_cliente
 ) { }
