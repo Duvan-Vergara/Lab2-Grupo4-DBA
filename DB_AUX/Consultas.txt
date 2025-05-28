@@ -30,6 +30,22 @@ FROM cliente c
 JOIN zona_cobertura z
   ON z.id_zona = 3
 
+
+--3
+
+SELECT 
+  r.nombre AS repartidor,
+  ROUND((SUM(ST_Length(p.ruta_estimada::geography)) / 1000)::numeric, 2) AS km_recorridos
+FROM 
+  pedido p
+JOIN repartidor r ON p.id_repartidor = r.id_repartidor
+JOIN detalle_pedido dp ON p.id_detalle_pedido = dp.id_detalle_pedido
+WHERE 
+  dp.hora_entrega >= NOW() - INTERVAL '1 month'
+GROUP BY 
+  r.nombre;
+
+
 -- 4. Identificar el punto de entrega más lejano desde cada empresa asociada.
 SELECT 
   e.id_empresa_asociada,
@@ -43,6 +59,20 @@ JOIN PEDIDO p ON p.id_pedido = (
   ORDER BY ST_Distance(e.ubicacion_empresa_asociada, p2.ubicacion_entrega) DESC
   LIMIT 1
 );
+
+--5
+
+  SELECT 
+  p.id_pedido,
+  COUNT(DISTINCT z.id_zona) AS zonas_cruzadas
+FROM 
+  pedido p
+JOIN zona_cobertura z
+  ON ST_Intersects(p.ruta_estimada, z.zona_geom)
+GROUP BY 
+  p.id_pedido
+HAVING 
+  COUNT(DISTINCT z.id_zona) > 2;
 
 --6. Determinar los clientes que están a más de 5km de cualquier empresa o farmacia. (Como están las distancias en grados, 5 km ≈ 0.045 grados.
 
