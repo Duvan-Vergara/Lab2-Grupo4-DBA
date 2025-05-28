@@ -84,4 +84,10 @@ public class PedidoController {
         pedidoService.eliminarPedido(id);
         return ResponseEntity.ok("Pedido eliminado correctamente");
     }
+
+    @GetMapping("/cercanos-a-empresa/{idEmpresa}")
+    public ResponseEntity<List<Map<String, Object>>> obtenerPedidosMasCercanosAEmpresa(@PathVariable Long idEmpresa) {
+        List<Map<String, Object>> pedidos = pedidoService.obtenerPedidosMasCercanosAEmpresa(idEmpresa);
+        return ResponseEntity.ok(pedidos);
+    }
 }

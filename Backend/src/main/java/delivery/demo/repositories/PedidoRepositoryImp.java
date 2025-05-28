@@ -112,4 +112,37 @@ public class PedidoRepositoryImp {
         }
     }
 
+    public List<Map<String, Object>> obtenerPedidosMasCercanosAEmpresa(Long idEmpresa) {
+        String sql = """
+        SELECT 
+            p.id_pedido,
+            ST_Distance(
+                ea.ubicacion_empresa_asociada::geography,
+                p.ubicacion_entrega::geography
+            ) AS distancia_metros
+        FROM 
+            EMPRESA_ASOCIADA ea
+        JOIN 
+            PEDIDO p ON TRUE
+        JOIN 
+            DETALLE_PEDIDO dp ON p.id_detalle_pedido = dp.id_detalle_pedido
+        WHERE 
+            ea.id_empresa_asociada = :idEmpresa
+            AND dp.entregado = false
+            AND ea.deleted_at IS NULL
+            AND p.deleted_at IS NULL
+            AND dp.deleted_at IS NULL
+        ORDER BY 
+            distancia_metros ASC
+        LIMIT 5
+    """;
+
+        try (Connection con = sql2o.open()) {
+            return con.createQuery(sql)
+                    .addParameter("idEmpresa", idEmpresa)
+                    .executeAndFetchTable()
+                    .asList();
+        }
+    }
+
 }

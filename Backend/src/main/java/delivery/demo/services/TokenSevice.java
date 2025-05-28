@@ -42,11 +42,12 @@ public class TokenSevice {
     public TokenResponse login(LoginRequest request){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.email(),
+                        request.correo(),
                         request.password()
                 )
         );
-        var cliente = clienteService.findByCorreo(request.email());
+        var cliente = clienteService.findByCorreo(request.correo());
+
         var jwtToken = jwtService.generateToken(cliente);
         return new TokenResponse(jwtToken);
     }

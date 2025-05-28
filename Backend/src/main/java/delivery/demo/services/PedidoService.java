@@ -77,4 +77,8 @@ public class PedidoService {
     public void eliminarPedido(Long id) {
         pedidoRepositoryImp.eliminarPedido(id);
     }
+
+    public List<Map<String, Object>> obtenerPedidosMasCercanosAEmpresa(Long idEmpresa) {
+        return pedidoRepositoryImp.obtenerPedidosMasCercanosAEmpresa(idEmpresa);
+    }
 }

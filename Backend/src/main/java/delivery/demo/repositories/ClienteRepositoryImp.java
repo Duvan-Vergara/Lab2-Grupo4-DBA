@@ -101,7 +101,7 @@ public class ClienteRepositoryImp implements ClienteRepository {
     public Optional<ClienteEntity> findByCorreo(String correo) {
         String sql = """
                 SELECT * FROM CLIENTE 
-                WHERE correo = :correo AND deleted_at IS NULL
+                WHERE correo = :correo
                 """;
 
         try (Connection con = sql2o.open()) {
