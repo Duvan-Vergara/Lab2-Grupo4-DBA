@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.awt.*;
+import org.locationtech.jts.geom.Polygon;
 
 @Data
 @AllArgsConstructor
