@@ -131,10 +131,16 @@ public class ClienteRepositoryImp implements ClienteRepository {
     @Override
     public ClienteEntity save(ClienteEntity cliente) {
         String sql = """
-                        INSERT INTO CLIENTE (nombre, direccion, correo, password)
-                    VALUES (:nombre, :direccion, :correo, :password)
-                    RETURNING id_cliente
-                """;
+        INSERT INTO CLIENTE (nombre, direccion, correo, password, ubicacion_cliente)
+        VALUES (:nombre, :direccion, :correo, :password, ST_SetSRID(ST_GeomFromText(:ubicacion), 4326))
+        RETURNING id_cliente
+    """;
+
+        // Convertir Point a WKT
+        String wkt = String.format("POINT(%s %s)",
+                cliente.getUbicacion_cliente().getX(), // Longitud
+                cliente.getUbicacion_cliente().getY()  // Latitud
+        );
 
         try (Connection con = sql2o.open()) {
             Long id = con.createQuery(sql)
@@ -142,6 +148,7 @@ public class ClienteRepositoryImp implements ClienteRepository {
                     .addParameter("direccion", cliente.getDireccion())
                     .addParameter("correo", cliente.getCorreo())
                     .addParameter("password", cliente.getPassword())
+                    .addParameter("ubicacion", wkt) // Ahora pasas el WKT como string
                     .executeUpdate()
                     .getKey(Long.class);
 
