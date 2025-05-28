@@ -7,5 +7,6 @@ public record RegisterRequest(
         String direccion,
         String correo,
         String password,
-        Point ubicacion_cliente
+        double latitude,
+        double longitude
 ) { }

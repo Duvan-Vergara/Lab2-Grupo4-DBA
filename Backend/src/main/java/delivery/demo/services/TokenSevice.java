@@ -5,6 +5,9 @@ import delivery.demo.config.RegisterRequest;
 import delivery.demo.config.TokenResponse;
 import delivery.demo.entities.ClienteEntity;
 import lombok.RequiredArgsConstructor;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,11 +24,15 @@ public class TokenSevice {
     private final AuthenticationManager authenticationManager;
 
     public TokenResponse register(final RegisterRequest request) {
+        GeometryFactory geometryFactory = new GeometryFactory();
+        Point direccionn = geometryFactory.createPoint(new Coordinate(request.longitude(), request.latitude()));
+        direccionn.setSRID(4326);
         var cliente = ClienteEntity.builder()
                 .nombre(request.nombre())
                 .correo(request.correo())
                 .direccion(request.direccion())
                 .password(passwordEncoder.encode(request.password()))
+                .ubicacion_cliente(direccionn)
                 .build();
         clienteService.save(cliente);
         var jwtToken = jwtService.generateToken(cliente);
