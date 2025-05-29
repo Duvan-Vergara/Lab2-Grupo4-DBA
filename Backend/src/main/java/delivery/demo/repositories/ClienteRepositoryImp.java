@@ -100,15 +100,36 @@ public class ClienteRepositoryImp implements ClienteRepository {
     @Override
     public Optional<ClienteEntity> findByCorreo(String correo) {
         String sql = """
-                SELECT * FROM CLIENTE 
-                WHERE correo = :correo
-                """;
-
+        SELECT id_cliente, nombre, direccion, correo, password, ST_AsText(ubicacion_cliente) AS ubicacion_wkt
+        FROM CLIENTE
+        WHERE correo = :correo
+    """;
         try (Connection con = sql2o.open()) {
-            ClienteEntity cliente = con.createQuery(sql)
+            var row = con.createQuery(sql)
                     .addParameter("correo", correo)
-                    .executeAndFetchFirst(ClienteEntity.class);
-            return Optional.ofNullable(cliente);
+                    .executeAndFetchTable()
+                    .asList()
+                    .stream()
+                    .findFirst()
+                    .orElse(null);
+
+            if (row == null) return Optional.empty();
+
+            ClienteEntity cliente = new ClienteEntity();
+            cliente.setId_cliente(((Number) row.get("id_cliente")).longValue());
+            cliente.setNombre((String) row.get("nombre"));
+            cliente.setDireccion((String) row.get("direccion"));
+            cliente.setCorreo((String) row.get("correo"));
+            cliente.setPassword((String) row.get("password"));
+
+            // Convertir WKT a Point
+            String wkt = (String) row.get("ubicacion_wkt");
+            if (wkt != null) {
+                org.locationtech.jts.io.WKTReader reader = new org.locationtech.jts.io.WKTReader();
+                cliente.setUbicacion_cliente((org.locationtech.jts.geom.Point) reader.read(wkt));
+            }
+
+            return Optional.of(cliente);
         } catch (Exception e) {
             e.printStackTrace();
             return Optional.empty();
@@ -148,7 +169,7 @@ public class ClienteRepositoryImp implements ClienteRepository {
                     .addParameter("direccion", cliente.getDireccion())
                     .addParameter("correo", cliente.getCorreo())
                     .addParameter("password", cliente.getPassword())
-                    .addParameter("ubicacion", wkt) // Ahora pasas el WKT como string
+                    .addParameter("ubicacion", wkt)
                     .executeUpdate()
                     .getKey(Long.class);
 

@@ -46,6 +46,7 @@ public class TokenSevice {
                         request.password()
                 )
         );
+        System.out.println("correo: " + request.correo());
         var cliente = clienteService.findByCorreo(request.correo());
 
         var jwtToken = jwtService.generateToken(cliente);

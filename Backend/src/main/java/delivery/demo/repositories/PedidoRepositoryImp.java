@@ -6,6 +6,7 @@ import org.sql2o.Sql2o;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Repository
 public class PedidoRepositoryImp {
@@ -114,27 +115,24 @@ public class PedidoRepositoryImp {
 
     public List<Map<String, Object>> obtenerPedidosMasCercanosAEmpresa(Long idEmpresa) {
         String sql = """
-        SELECT 
+        SELECT\s
             p.id_pedido,
             ST_Distance(
                 ea.ubicacion_empresa_asociada::geography,
                 p.ubicacion_entrega::geography
             ) AS distancia_metros
-        FROM 
+        FROM\s
             EMPRESA_ASOCIADA ea
-        JOIN 
+        JOIN\s
             PEDIDO p ON TRUE
-        JOIN 
+        JOIN\s
             DETALLE_PEDIDO dp ON p.id_detalle_pedido = dp.id_detalle_pedido
-        WHERE 
+        WHERE\s
             ea.id_empresa_asociada = :idEmpresa
             AND dp.entregado = false
-            AND ea.deleted_at IS NULL
-            AND p.deleted_at IS NULL
-            AND dp.deleted_at IS NULL
-        ORDER BY 
+        ORDER BY\s
             distancia_metros ASC
-        LIMIT 5
+        LIMIT 5;
     """;
 
         try (Connection con = sql2o.open()) {
@@ -142,6 +140,9 @@ public class PedidoRepositoryImp {
                     .addParameter("idEmpresa", idEmpresa)
                     .executeAndFetchTable()
                     .asList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return List.of(); // Retorna una lista vacía en caso de error
         }
     }
 
