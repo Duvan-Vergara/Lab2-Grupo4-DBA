@@ -191,4 +191,27 @@ public class ClienteRepositoryImp implements ClienteRepository {
                     .executeUpdate();
         }
     }
+
+    //Consulta 2
+    @Override
+    public List<Map<String, Object>> verificarClientesEnZona(Long idZona) {
+        String sql = """
+        SELECT
+            c.id_cliente,
+            c.nombre,
+            CASE
+                WHEN ST_Within(c.ubicacion_cliente, z.zona_geom) THEN 'Dentro de la zona'
+                ELSE 'Fuera de la zona'
+            END AS estado
+        FROM cliente c
+        JOIN zona_cobertura z ON z.id_zona = :idZona
+    """;
+
+        try (Connection con = sql2o.open()) {
+            return con.createQuery(sql)
+                    .addParameter("idZona", idZona)
+                    .executeAndFetchTable()
+                    .asList();
+        }
+    }
 }

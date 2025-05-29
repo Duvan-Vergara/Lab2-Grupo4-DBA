@@ -113,6 +113,7 @@ public class PedidoRepositoryImp {
         }
     }
 
+    //Consulta 1
     public List<Map<String, Object>> obtenerPedidosMasCercanosAEmpresa(Long idEmpresa) {
         String sql = """
         SELECT\s

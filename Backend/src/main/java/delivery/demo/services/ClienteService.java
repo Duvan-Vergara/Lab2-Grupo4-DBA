@@ -38,4 +38,8 @@ public class ClienteService {
     public void delete(Long id) {
         clienteRepository.delete(id);
     }
+
+    public List<Map<String, Object>> verificarClientesEnZona(Long idZona) {
+        return clienteRepository.verificarClientesEnZona(idZona);
+    }
 }

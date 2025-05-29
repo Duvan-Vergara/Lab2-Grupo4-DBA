@@ -4,9 +4,11 @@ import delivery.demo.entities.ClienteEntity;
 import delivery.demo.services.ClienteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/cliente")
@@ -34,5 +36,10 @@ public class ClienteController {
     @DeleteMapping("/eliminar/{id_cliente}")
     public void eliminarCliente(@PathVariable Long id_cliente) {
         clienteService.delete(id_cliente);
+    }
+
+    @GetMapping("/en-zona/{idZona}")
+    public ResponseEntity<List<Map<String, Object>>> verificarClientesEnZona(@PathVariable Long idZona) {
+        return ResponseEntity.ok(clienteService.verificarClientesEnZona(idZona));
     }
 }
