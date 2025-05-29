@@ -104,4 +104,24 @@ public class EmpresaAsociadaRepositoryImp {
         }
     }
 
+    //Consulta 6
+    public List<Map<String, Object>> obtenerClientesSinEmpresaCercana() {
+        String sql = """
+        SELECT c.id_cliente, c.nombre
+        FROM cliente c
+        WHERE NOT EXISTS (
+          SELECT 1
+          FROM empresa_asociada e
+          WHERE ST_Distance(c.ubicacion_cliente, e.ubicacion_empresa_asociada) <= 0.045
+        );
+    """;
+
+        try (org.sql2o.Connection con = sql2o.open()) {
+            return con.createQuery(sql)
+                    .executeAndFetchTable()
+                    .asList();
+        }
+    }
+
+
 }

@@ -23,4 +23,7 @@ public class EmpresaAsociadaService {
         return empresaAsociadaRepositoryImp.obtenerPedidoMasLejanoPorEmpresa();
     }
 
+    public List<Map<String, Object>> obtenerClientesSinEmpresaCercana() {
+        return empresaAsociadaRepositoryImp.obtenerClientesSinEmpresaCercana();
+    }
 }

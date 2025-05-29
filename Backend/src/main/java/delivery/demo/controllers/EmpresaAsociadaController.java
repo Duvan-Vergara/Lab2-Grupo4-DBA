@@ -32,4 +32,9 @@ public class EmpresaAsociadaController {
         return ResponseEntity.ok(empresaAsociadaService.obtenerPedidoMasLejanoPorEmpresa());
     }
 
+    @GetMapping("/clientes-sin-empresa-cercana")
+    public List<Map<String, Object>> obtenerClientesSinEmpresaCercana() {
+        return empresaAsociadaService.obtenerClientesSinEmpresaCercana();
+    }
+
 }
