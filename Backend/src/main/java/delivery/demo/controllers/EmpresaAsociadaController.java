@@ -2,6 +2,7 @@ package delivery.demo.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import delivery.demo.services.EmpresaAsociadaService;
 
@@ -25,4 +26,10 @@ public class EmpresaAsociadaController {
     public List<Map<String, Object>> obtenerEmpresasConMasEntregas() {
         return empresaAsociadaService.obtenerEntregasExitosasPorEmpresa();
     }
+
+    @GetMapping("/pedido-mas-lejano")
+    public ResponseEntity<List<Map<String, Object>>> obtenerPedidoMasLejano() {
+        return ResponseEntity.ok(empresaAsociadaService.obtenerPedidoMasLejanoPorEmpresa());
+    }
+
 }

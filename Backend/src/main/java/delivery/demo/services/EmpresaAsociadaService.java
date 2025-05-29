@@ -18,4 +18,9 @@ public class EmpresaAsociadaService {
     public List<Map<String, Object>> obtenerEntregasExitosasPorEmpresa() {
         return empresaAsociadaRepositoryImp.obtenerEntregasExitosasPorEmpresa();
     }
+
+    public List<Map<String, Object>> obtenerPedidoMasLejanoPorEmpresa() {
+        return empresaAsociadaRepositoryImp.obtenerPedidoMasLejanoPorEmpresa();
+    }
+
 }

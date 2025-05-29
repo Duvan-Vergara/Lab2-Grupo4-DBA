@@ -79,4 +79,29 @@ public class EmpresaAsociadaRepositoryImp {
                     .asList();
         }
     }
+
+    //Consulta 4
+    public List<Map<String, Object>> obtenerPedidoMasLejanoPorEmpresa() {
+        String sql = """
+        SELECT
+          e.id_empresa_asociada,
+          e.nombre AS empresa,
+          p.id_pedido,
+          ST_Distance(e.ubicacion_empresa_asociada, p.ubicacion_entrega) AS distancia
+        FROM EMPRESA_ASOCIADA e
+        JOIN PEDIDO p ON p.id_pedido = (
+          SELECT p2.id_pedido
+          FROM PEDIDO p2
+          ORDER BY ST_Distance(e.ubicacion_empresa_asociada, p2.ubicacion_entrega) DESC
+          LIMIT 1
+        );
+    """;
+
+        try (org.sql2o.Connection con = sql2o.open()) {
+            return con.createQuery(sql)
+                    .executeAndFetchTable()
+                    .asList();
+        }
+    }
+
 }
