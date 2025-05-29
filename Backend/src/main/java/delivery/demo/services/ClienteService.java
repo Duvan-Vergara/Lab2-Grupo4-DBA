@@ -42,4 +42,12 @@ public class ClienteService {
     public List<Map<String, Object>> verificarClientesEnZona(Long idZona) {
         return clienteRepository.verificarClientesEnZona(idZona);
     }
+
+    public Map<String, Object> obtenerZonaDeCliente(Long idCliente) {
+        Map<String, Object> zona = clienteRepository.findZonaDeCliente(idCliente);
+        if (zona == null) {
+            throw new RuntimeException("El cliente no pertenece a ninguna zona de cobertura");
+        }
+        return zona;
+    }
 }

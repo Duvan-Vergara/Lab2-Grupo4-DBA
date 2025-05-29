@@ -20,4 +20,6 @@ public interface ClienteRepository {
     void delete(Long id);
 
     List<Map<String, Object>> verificarClientesEnZona(Long idZona);
+
+    Map<String, Object> findZonaDeCliente(Long idCliente);
 }

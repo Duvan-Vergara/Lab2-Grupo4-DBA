@@ -215,5 +215,26 @@ public class ClienteRepositoryImp implements ClienteRepository {
         }
     }
 
-    
+    //extra 1
+    public Map<String, Object> findZonaDeCliente(Long idCliente) {
+        String sql = """
+            SELECT z.id_zona, z.nombre, z.tipo
+            FROM ZONA_COBERTURA z
+            JOIN CLIENTE c ON c.id_cliente = :idCliente
+            WHERE ST_Within(c.ubicacion_cliente, z.zona_geom)
+        """;
+
+        try (Connection con = sql2o.open()) {
+            return con.createQuery(sql)
+                    .addParameter("idCliente", idCliente)
+                    .executeAndFetchTable()
+                    .asList()
+                    .stream()
+                    .findFirst()
+                    .orElse(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

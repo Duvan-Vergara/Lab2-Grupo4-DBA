@@ -42,4 +42,10 @@ public class ClienteController {
     public ResponseEntity<List<Map<String, Object>>> verificarClientesEnZona(@PathVariable Long idZona) {
         return ResponseEntity.ok(clienteService.verificarClientesEnZona(idZona));
     }
+
+    @GetMapping("/zona-de-cliente/{idCliente}")
+    public ResponseEntity<Map<String, Object>> obtenerZonaDeCliente(@PathVariable Long idCliente) {
+        return ResponseEntity.ok(clienteService.obtenerZonaDeCliente(idCliente));
+    }
+
 }
