@@ -8,6 +8,12 @@
         <nuxt-link to="/register" class="btn btn-link">Registrarse</nuxt-link>
         <nuxt-link to="/cliente" class="btn btn-link">Clientes</nuxt-link>
         <nuxt-link to="/desempeno" class="btn btn-link">Desempeño</nuxt-link>
+        <nuxt-link to="/cercanosEmpresa" class="btn btn-link">CercanosEmpresa</nuxt-link>
+        <nuxt-link to="/clienteCobertura" class="btn btn-link">Cliente Cobertura</nuxt-link>
+        <nuxt-link to="/pedidosMasLejanos" class="btn btn-link">Pedidos Más Lejanos</nuxt-link>
+        <nuxt-link to="/clientesSinEmpresaCercana" class="btn btn-link">Clientes Sin Empresa Cercana</nuxt-link>
+        <nuxt-link to="/clientesEnZona" class="btn btn-link">Clientes en Zona</nuxt-link>
+        <nuxt-link to="/zonaDensa" class="btn btn-link">Zona Densa</nuxt-link>
       </nav>
     </header>
     <main>

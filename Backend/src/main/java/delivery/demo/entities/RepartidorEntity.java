@@ -18,4 +18,5 @@ public class RepartidorEntity {
     private Long id_empresa_asociada;
     private LocalDate deleted_at;
     private Point ubicacion_repartidor;
+    private double Distancia_recorrida;
 }

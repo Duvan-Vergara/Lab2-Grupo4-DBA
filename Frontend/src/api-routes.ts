@@ -5,7 +5,8 @@ const API_ROUTES = {
     LOGOUT: '/auth/logout',
     CLIENTE: '/cliente',
     DESEMPENO: '/repartidor/desempenios',
-    EMPRESA: '/empresaAsociada'
+    EMPRESA: '/empresaAsociada',
+    CERCANOS: '/pedido/cercanos-a-empresa',
   }
   
   export default API_ROUTES

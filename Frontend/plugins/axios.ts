@@ -6,7 +6,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   // Crear una instancia de Axios
   const $apiClient = axios.create({
-    baseURL: `http://${config.public.backendServer}:${config.public.backendPort}`,
+    baseURL: `http://localhost:8090`,
     headers: {
       'Content-Type': 'application/json',
     },
