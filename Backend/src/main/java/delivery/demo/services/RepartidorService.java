@@ -33,4 +33,7 @@ public class RepartidorService {
     public RepartidorEntity crearRepartidor(RepartidorEntity repartidor) {
         return repartidorRepositoryImp.crearRepartidor(repartidor);
     }
+    public List<Map<String, Object>> obtenerDistanciaRecorridaUltimoMes(){
+        return repartidorRepositoryImp.obtenerDistanciaRecorridaUltimoMes();
+    }
 }

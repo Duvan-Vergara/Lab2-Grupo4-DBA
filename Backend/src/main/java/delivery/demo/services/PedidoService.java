@@ -29,6 +29,10 @@ public class PedidoService {
         return pedidoRepositoryImp.obtenerTiemposPromedioEntrega();
     }
 
+    public List<Map<String, Object>> obtenerPedidosQueCruzanMultiplesZonas() {
+        return pedidoRepositoryImp.obtenerPedidosQueCruzanMultiplesZonas();
+    }
+
     public Long registrarPedidoConProductos(
             Long idUrgencia,
             Long idRepartidor,

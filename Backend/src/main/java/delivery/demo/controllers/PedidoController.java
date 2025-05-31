@@ -29,6 +29,10 @@ public class PedidoController {
         return pedidoService.obtenerTiemposPromedioEntrega();
     }
 
+    @GetMapping("/pedidos-multiples-zonas")
+    public List<Map<String, Object>> obtenerPedidosQueCruzanMultiplesZonas() {
+        return pedidoService.obtenerPedidosQueCruzanMultiplesZonas();
+    }
     @PostMapping("/crear")
     public ResponseEntity<Long> crearPedido(@RequestBody Map<String, Object> body) {
         Long idUrgencia   = ((Number) body.get("idUrgencia")).longValue();

@@ -125,4 +125,28 @@ public class RepartidorRepositoryImp {
         }
     }
 
+    // Distancia recorrida por cada repartidor en el último mes
+    public List<Map<String, Object>> obtenerDistanciaRecorridaUltimoMes() {
+        String sql = """
+                SELECT 
+                  r.nombre AS repartidor,
+                  ROUND((SUM(ST_Length(p.ruta_estimada::geography)) / 1000)::numeric, 2) AS km_recorridos
+                FROM 
+                  pedido p
+                JOIN repartidor r ON p.id_repartidor = r.id_repartidor
+                JOIN detalle_pedido dp ON p.id_detalle_pedido = dp.id_detalle_pedido
+                WHERE 
+                  dp.hora_entrega >= NOW() - INTERVAL '1 month'
+                GROUP BY 
+                  r.nombre;
+            """;
+
+        try (org.sql2o.Connection con = sql2o.open()) {
+            return con.createQuery(sql)
+                    .executeAndFetchTable()
+                    .asList();
+        }
+    }
+
+
 }

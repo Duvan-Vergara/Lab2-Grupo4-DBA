@@ -147,4 +147,27 @@ public class PedidoRepositoryImp {
         }
     }
 
+    public List<Map<String, Object>> obtenerPedidosQueCruzanMultiplesZonas() {
+        String sql = """
+                SELECT 
+                  p.id_pedido,
+                  COUNT(DISTINCT z.id_zona) AS zonas_cruzadas
+                FROM 
+                  pedido p
+                JOIN zona_cobertura z
+                  ON ST_Intersects(p.ruta_estimada, z.zona_geom)
+                GROUP BY 
+                  p.id_pedido
+                HAVING 
+                  COUNT(DISTINCT z.id_zona) > 2;
+            """;
+
+        try (org.sql2o.Connection con = sql2o.open()) {
+            return con.createQuery(sql)
+                    .executeAndFetchTable()
+                    .asList();
+        }
+    }
+
+
 }

@@ -25,6 +25,10 @@ public class RepartidorController {
     public List<Map<String, Object>> obtenerDesempenoPorRepartidor() {
         return repartidorService.obtenerDesempenoPorRepartidor();
     }
+    @GetMapping("/distancia-recorrida")
+    public List<Map<String, Object>> obtenerDistanciaRecorridaUltimoMes() {
+        return repartidorService.obtenerDistanciaRecorridaUltimoMes();
+    }
 
     @GetMapping("/")
     public List<RepartidorEntity> obtenerTodos() {
