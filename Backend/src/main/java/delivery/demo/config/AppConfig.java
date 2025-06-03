@@ -3,7 +3,6 @@ package delivery.demo.config;
 import delivery.demo.entities.ClienteEntity;
 import delivery.demo.repositories.ClienteRepository;
 import delivery.demo.repositories.ClienteRepositoryImp;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +17,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.sql2o.Sql2o;
 
 @Configuration
-@RequiredArgsConstructor
 public class AppConfig {
+
+    public AppConfig() {
+    }
 
     @Bean
     public UserDetailsService userDetailsService(ClienteRepository clienteRepository) {

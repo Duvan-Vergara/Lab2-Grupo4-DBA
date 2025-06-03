@@ -1,20 +1,21 @@
 package delivery.demo.controllers;
 
 import delivery.demo.services.PedidoService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/pedido")
 @CrossOrigin
-@RequiredArgsConstructor
 public class PedidoController {
+
+    public PedidoController(PedidoService pedidoService) {
+        this.pedidoService = pedidoService;
+    }
 
     @Autowired
     private final PedidoService pedidoService;

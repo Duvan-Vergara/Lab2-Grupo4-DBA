@@ -4,15 +4,17 @@ import delivery.demo.config.LoginRequest;
 import delivery.demo.config.RegisterRequest;
 import delivery.demo.config.TokenResponse;
 import delivery.demo.services.TokenSevice;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-@RequiredArgsConstructor
 public class TokenController {
+
+    public TokenController(TokenSevice tokenSevice) {
+        this.tokenSevice = tokenSevice;
+    }
 
     private final TokenSevice tokenSevice;
 

@@ -4,7 +4,6 @@ import delivery.demo.config.LoginRequest;
 import delivery.demo.config.RegisterRequest;
 import delivery.demo.config.TokenResponse;
 import delivery.demo.entities.ClienteEntity;
-import lombok.RequiredArgsConstructor;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
@@ -15,8 +14,14 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-@RequiredArgsConstructor
 public class TokenSevice {
+
+    public TokenSevice(ClienteService clienteService, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager) {
+        this.clienteService = clienteService;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager;
+    }
 
     private final ClienteService clienteService;
     private final PasswordEncoder passwordEncoder;
@@ -27,13 +32,17 @@ public class TokenSevice {
         GeometryFactory geometryFactory = new GeometryFactory();
         Point direccionn = geometryFactory.createPoint(new Coordinate(request.longitude(), request.latitude()));
         direccionn.setSRID(4326);
-        var cliente = ClienteEntity.builder()
-                .nombre(request.nombre())
-                .correo(request.correo())
-                .direccion(request.direccion())
-                .password(passwordEncoder.encode(request.password()))
-                .ubicacion_cliente(direccionn)
-                .build();
+
+        ClienteEntity cliente = new ClienteEntity(
+                null,
+                request.nombre(),
+                request.direccion(),
+                request.correo(),
+                passwordEncoder.encode(request.password()),
+                null,
+                direccionn
+        );
+
         clienteService.save(cliente);
         var jwtToken = jwtService.generateToken(cliente);
         return new TokenResponse(jwtToken);

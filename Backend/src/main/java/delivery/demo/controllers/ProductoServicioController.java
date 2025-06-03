@@ -2,7 +2,6 @@ package delivery.demo.controllers;
 
 import delivery.demo.entities.ProductoServicioEntity;
 import delivery.demo.services.ProductoServicioService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +10,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/productoServicio")
 @CrossOrigin
-@RequiredArgsConstructor
 
 public class ProductoServicioController {
+
+    public ProductoServicioController(ProductoServicioService productoServicioService) {
+        this.productoServicioService = productoServicioService;
+    }
 
     @Autowired
     private final ProductoServicioService productoServicioService;

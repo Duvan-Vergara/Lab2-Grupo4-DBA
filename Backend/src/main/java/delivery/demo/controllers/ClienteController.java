@@ -2,7 +2,6 @@ package delivery.demo.controllers;
 
 import delivery.demo.entities.ClienteEntity;
 import delivery.demo.services.ClienteService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +11,11 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/cliente")
-@RequiredArgsConstructor
 public class ClienteController {
+
+    public ClienteController(ClienteService clienteService) {
+        this.clienteService = clienteService;
+    }
 
     @Autowired
     private final ClienteService clienteService;
