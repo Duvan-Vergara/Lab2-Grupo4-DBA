@@ -38,21 +38,39 @@ public class PedidoService {
             Long idRepartidor,
             Long idCliente,
             Long idMedioPago,
+            String ubicacionEntrega,
+            String rutaEstimada,
             List<Long> productos,
             List<Integer> cantidades
     ) {
-        String sql = "SELECT registrar_pedido(:u, :r, :c, :m, :ids, :cts)";
+        String sql = """
+        SELECT registrar_pedido(
+            :u, :r, :c, :m,
+            ST_SetSRID(ST_MakePoint(:lon, :lat), 4326),
+            ST_SetSRID(ST_GeomFromText(:re), 4326),
+            :ids, :cts
+        )
+    """;
+
+        String[] coord = ubicacionEntrega.trim().split("\\s+");
+        double lon = Double.parseDouble(coord[0]);
+        double lat = Double.parseDouble(coord[1]);
 
         MapSqlParameterSource params = new MapSqlParameterSource()
                 .addValue("u", idUrgencia)
                 .addValue("r", idRepartidor)
                 .addValue("c", idCliente)
                 .addValue("m", idMedioPago)
+                .addValue("lon", lon)
+                .addValue("lat", lat)
+                .addValue("re", rutaEstimada)
                 .addValue("ids", productos.toArray(new Long[0]))
                 .addValue("cts", cantidades.toArray(new Integer[0]));
 
         return jdbc.queryForObject(sql, params, Long.class);
     }
+
+
 
     public void confirmarPedido(Long idPedido) {
         String sql = "SELECT confirmar_pedido(:id)";

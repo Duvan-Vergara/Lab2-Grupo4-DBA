@@ -27,11 +27,7 @@ public class PedidoRepositoryImp {
                     JOIN PRODUCTO_SERVICIO ps ON pp.id_producto_servicio = ps.id_producto_servicio
                     JOIN CATEGORIA c ON ps.id_categoria = c.id_categoria
                     JOIN PEDIDO p ON pp.id_pedido = p.id_pedido
-                    WHERE p.hora_pedido >= NOW() - INTERVAL '1 month' 
-                      AND pp.deleted_at IS NULL
-                      AND ps.deleted_at IS NULL
-                      AND c.deleted_at IS NULL
-                    AND p.deleted_at IS NULL
+                    WHERE p.hora_pedido >= NOW() - INTERVAL '1 month'  
                     GROUP BY c.nombre, ps.id_producto_servicio
                     ORDER BY c.nombre, total_pedidos DESC
                 """;
@@ -58,9 +54,6 @@ public class PedidoRepositoryImp {
                       REPARTIDOR r ON p.id_repartidor = r.id_repartidor
                     WHERE 
                       d.entregado = TRUE
-                    AND p.deleted_at IS NULL
-                    AND d.deleted_at IS NULL
-                    AND r.deleted_at IS NULL
                     GROUP BY 
                       r.id_repartidor, r.nombre
                     ORDER BY 
