@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-center my-8">
     <h1>Pedidos más lejanos por empresa</h1>
     
     <button @click="obtenerPedidosLejanos">Obtener pedidos lejanos</button>
@@ -12,7 +12,7 @@
       <p>Error: {{ error }}</p>
     </div>
 
-    <table v-if="pedidos.length > 0">
+    <table v-if="pedidos.length > 0" class="mx-auto">
       <thead>
         <tr>
           <th>Empresa</th>

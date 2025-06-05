@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-center my-8">
     <h1>Verificar Zona de Cobertura</h1>
     
     <div>

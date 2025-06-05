@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-center my-8">
     <h1>Verificación de clientes en zona</h1>
     
     <div>
@@ -26,7 +26,7 @@
       <p>Clientes dentro de zona: {{ clientesDentro }}</p>
       <p>Clientes fuera de zona: {{ clientesFuera }}</p>
       
-      <table>
+      <table class="mx-auto">
         <thead>
           <tr>
             <th>ID</th>

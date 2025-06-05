@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-center my-8">
     <h1>Zonas de alta densidad</h1>
     
     <button @click="obtenerZonasAltaDensidad">Obtener zonas de alta densidad</button>
@@ -12,7 +12,7 @@
       <p>Error: {{ error }}</p>
     </div>
 
-    <table v-if="zonas.length > 0">
+    <table v-if="zonas.length > 0" class="mx-auto">
       <thead>
         <tr>
           <th>ID Zona</th>

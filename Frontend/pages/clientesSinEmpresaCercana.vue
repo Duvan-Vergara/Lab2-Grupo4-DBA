@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-center my-8">
     <h1>Clientes sin empresa cercana</h1>
     
     <button @click="obtenerClientesSinCobertura">Obtener clientes</button>
@@ -12,7 +12,7 @@
       <p>Error: {{ error }}</p>
     </div>
 
-    <div v-if="clientes.length > 0">
+    <div v-if="clientes.length > 0" class="mx-auto">
       <h2>Clientes encontrados: {{ clientes.length }}</h2>
       <ul>
         <li v-for="cliente in clientes" :key="cliente.id_cliente">
