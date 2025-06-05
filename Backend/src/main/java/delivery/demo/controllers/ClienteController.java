@@ -26,7 +26,7 @@ public class ClienteController {
     }
 
     @GetMapping("/")
-    public List<ClienteEntity> obtenerClientes() {
+    public List<Map<String, Object>> obtenerClientes() {
         return clienteService.obtenerClientes();
     }
 

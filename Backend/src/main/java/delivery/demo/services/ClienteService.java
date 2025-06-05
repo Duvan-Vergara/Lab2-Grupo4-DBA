@@ -1,6 +1,7 @@
 package delivery.demo.services;
 
 import delivery.demo.entities.ClienteEntity;
+import delivery.demo.repositories.ClienteRepositoryImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import delivery.demo.repositories.ClienteRepository;
@@ -13,14 +14,18 @@ public class ClienteService {
 
     @Autowired
     ClienteRepository clienteRepository;
+    @Autowired
+    ClienteRepositoryImp clienteRepositoryImp;
 
     public Map<String, Object> obtenerClienteConMasGasto() {
         return clienteRepository.findClienteQueMasGasto();
     }
 
-    public List<ClienteEntity> obtenerClientes() {
-        return clienteRepository.findAllClientes();
+
+    public List<Map<String, Object>> obtenerClientes() {
+        return clienteRepositoryImp.findAllClientes();
     }
+
 
     public ClienteEntity idClienteTopGasto() {
         return clienteRepository.obtenerClienteConMasGasto();

@@ -13,7 +13,6 @@ public interface ClienteRepository {
 
     Optional<ClienteEntity> findByCorreo(String correo);
 
-    List<ClienteEntity> findAllClientes();
 
     ClienteEntity save(ClienteEntity cliente);
 

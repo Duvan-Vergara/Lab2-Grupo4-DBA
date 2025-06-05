@@ -136,16 +136,16 @@ public class ClienteRepositoryImp implements ClienteRepository {
         }
     }
 
-    @Override
-    public List<ClienteEntity> findAllClientes() {
+
+    public List<Map<String, Object>> findAllClientes() {
         String sql = """
-                SELECT * FROM CLIENTE
-                WHERE deleted_at IS NULL
-                """;
+        SELECT * FROM CLIENTE
+    """;
 
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
-                    .executeAndFetch(ClienteEntity.class);
+                    .executeAndFetchTable()
+                    .asList();
         }
     }
 
