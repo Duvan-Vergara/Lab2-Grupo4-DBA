@@ -2,7 +2,7 @@
   <div class="container">
     <header class="flex items-center justify-between p-4 border-b border-border-color">
       <div class="text-center my-8">
-        <h1 class="title">Mi Aplicación</h1>
+        <h1 class="title">Mercado Libren't</h1>
       </div>
 
       <nav class="flex flex-wrap gap-2">
@@ -25,8 +25,8 @@
     </main>
 
     <footer class="text-center p-4 border-t border-border-color">
-      <p class="text-optional-color">© 2025 Mi Aplicación</p>
       <button @click="logoutUser" class="btn btn-secondary mt-2">Cerrar Sesión</button>
+      <p class="text-optional-color">© 2025 Mi Aplicación</p>
     </footer>
   </div>
 </template>

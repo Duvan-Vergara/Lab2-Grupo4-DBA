@@ -1,17 +1,20 @@
 :root {
-  --background-color: #FFFFFF;   
-  --border-color: #DEE2E6;        
+  --background-color: #F7F7FF;   
+  --border-color: #070600;        
 
-  --primary-color: #E63946;         
-  --secondary-color: #2A9D8F;       
+  --primary-color: #EA526F;         
+  --secondary-color: #279AF1;       
   --accent-color: #003E35;          
 
-  --hover-color: #F4A261;          
+  --hover-color: #000000;          
 
   --text-color: #212529;            
-  --text-optional-color: #6C757D;   
+  --text-optional-color: #000000;   
 
-  --optional-color: #353561; 
+  --optional-color: #F7F7FF; 
+
+  /* Color de borde rosa */
+  --border-rose-color: #efa9f7;
   }
   
   body {
@@ -52,6 +55,7 @@
   button:hover {
     background-color: var(--hover-color);
     border-color: var(--accent-color);
+    color: var(--optional-color);
   }
   
   button:focus, button:focus-visible {
@@ -179,8 +183,8 @@
 
 .btn:hover, .btn-primary:hover, .btn-secondary:hover, .btn-link:hover {
     background-color: var(--hover-color);
-    border-color: var(--accent-color);
-    color: var(--text-color) !important;
+    border: 2px outset   var(--border-rose-color);
+    color: var(--optional-color) !important;
 }
 
 .btn-primary {
@@ -201,8 +205,4 @@
 .btn-link:hover {
     background: var(--optional-color);
     color: var(--hover-color) !important;
-}
-
-.title, .estadistica-title {
-    color: var(--text-optional-color);
 }

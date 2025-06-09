@@ -2,7 +2,7 @@
     <div class="container">
         <h1 class="title">Lista de Clientes</h1>
         <div class="buttons">
-            <button @click="fetchClientes('/')">Cargar Clientes 2</button>
+            <button @click="fetchClientes('/')">Cargar Clientes</button>
         </div>
         <div class="search">
             <input
