@@ -42,11 +42,12 @@
   }
   
   button {
+    font-size: 10px;
     background-color: var(--primary-color);
     color: var(--text-color);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: 0.6em 1.2em;
+    padding: 0.2em 0.9em;
     font-size: 1em;
     cursor: pointer;
     transition: background-color 0.3s, border-color 0.3s;
@@ -205,4 +206,84 @@
 .btn-link:hover {
     background: var(--optional-color);
     color: var(--hover-color) !important;
+}
+
+
+
+/* Estilos base */
+.container {
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+  z-index: 1000;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+/* Estilos de navegación */
+.nav-main {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-item {
+  padding: 0.75rem 0;
+  cursor: pointer;
+  position: relative;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-item:hover {
+  color: #0066cc;
+}
+
+/* Estilos dropdown */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  min-width: 220px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 4px;
+  z-index: 1001;
+  padding: 0.5rem 0;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 0.75rem 1.5rem;
+  color: #444;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.dropdown-content a:hover {
+  background: #f0f7ff;
+  color: #0066cc;
+  padding-left: 1.75rem;
+}
+
+/* Espaciado del contenido principal */
+.main-content {
+  padding: 2rem;
+  flex: 1;
 }

@@ -4,7 +4,7 @@
 
       <!-- Titulo de bienvenido centrado -->
       <div class="text-center my-8">
-        <h1 class="text-3xl font-bold">Bienvenido a la aplicación de delivery</h1>
+        <h1 class="title">Bienvenido a la aplicación de delivery</h1>
       </div>
     </div>
   </template>

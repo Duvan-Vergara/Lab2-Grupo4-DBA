@@ -1,35 +1,77 @@
 <template>
   <div class="container">
-    <header class="flex items-center justify-between p-4 border-b border-border-color">
-      <div class="text-center my-8">
+    <header class="navbar">
+      <div class="logo">
         <h1 class="title">Mercado Libren't</h1>
       </div>
 
-      <nav class="flex flex-wrap gap-2">
-        <nuxt-link to="/" class="btn btn-link">Inicio</nuxt-link>
-        <nuxt-link to="/login" class="btn btn-link">Iniciar Sesión</nuxt-link>
-        <nuxt-link to="/register" class="btn btn-link">Registrarse</nuxt-link>
-        <nuxt-link to="/cliente" class="btn btn-link">Clientes</nuxt-link>
-        <nuxt-link to="/desempeno" class="btn btn-link">Desempeño</nuxt-link>
-        <nuxt-link to="/cercanosEmpresa" class="btn btn-link">Cercanos Empresa</nuxt-link>
-        <nuxt-link to="/clienteCobertura" class="btn btn-link">Cliente Cobertura</nuxt-link>
-        <nuxt-link to="/pedidosMasLejanos" class="btn btn-link">Pedidos Más Lejanos</nuxt-link>
-        <nuxt-link to="/clientesSinEmpresaCercana" class="btn btn-link">Clientes Sin Empresa Cercana</nuxt-link>
-        <nuxt-link to="/clientesEnZona" class="btn btn-link">Clientes en Zona</nuxt-link>
-        <nuxt-link to="/zonaDensa" class="btn btn-link">Zona Densa</nuxt-link>
+      <nav class="nav-main">
+        <!-- Inicio (sin dropdown) -->
+        <nuxt-link to="/" class="nav-item" @click="closeAllDropdowns">Inicio</nuxt-link>
+
+        <!-- Acceso -->
+        <div class="nav-item dropdown" @mouseenter="openDropdown($event)" @mouseleave="closeDropdown($event)">
+          <span>Acceso</span>
+          <div class="dropdown-content" ref="accesoDropdown">
+            <nuxt-link to="/login" @click="closeAllDropdowns">Iniciar Sesión</nuxt-link>
+            <nuxt-link to="/register" @click="closeAllDropdowns">Registrarse</nuxt-link>
+          </div>
+        </div>
+
+        <!-- Clientes -->
+        <div class="nav-item dropdown" @mouseenter="openDropdown($event)" @mouseleave="closeDropdown($event)">
+          <span>Clientes</span>
+          <div class="dropdown-content" ref="clientesDropdown">
+            <nuxt-link to="/cliente" @click="closeAllDropdowns">Lista Clientes</nuxt-link>
+            <nuxt-link to="/clienteCobertura" @click="closeAllDropdowns">Cobertura</nuxt-link>
+            <nuxt-link to="/clientesSinEmpresaCercana" @click="closeAllDropdowns">Sin Empresa Cercana</nuxt-link>
+            <nuxt-link to="/clientesEnZona" @click="closeAllDropdowns">En Zona</nuxt-link>
+          </div>
+        </div>
+
+        <!-- Reportes -->
+        <div class="nav-item dropdown" @mouseenter="openDropdown($event)" @mouseleave="closeDropdown($event)">
+          <span>Reportes</span>
+          <div class="dropdown-content" ref="reportesDropdown">
+            <nuxt-link to="/desempeno" @click="closeAllDropdowns">Desempeño</nuxt-link>
+            <nuxt-link to="/cercanosEmpresa" @click="closeAllDropdowns">Cercanos Empresa</nuxt-link>
+            <nuxt-link to="/pedidosMasLejanos" @click="closeAllDropdowns">Pedidos Lejanos</nuxt-link>
+            <nuxt-link to="/zonaDensa" @click="closeAllDropdowns">Zona Densa</nuxt-link>
+          </div>
+        </div>
       </nav>
     </header>
 
-    <main class="p-6">
+    <main class="main-content">
       <nuxt-page />
     </main>
-
-    <footer class="text-center p-4 border-t border-border-color">
-      <button @click="logoutUser" class="btn btn-secondary mt-2">Cerrar Sesión</button>
-      <p class="text-optional-color">© 2025 Mi Aplicación</p>
-    </footer>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    openDropdown(event) {
+      const dropdown = event.currentTarget.querySelector('.dropdown-content')
+      this.closeAllDropdowns()
+      dropdown.style.display = 'block'
+    },
+    closeDropdown(event) {
+      const dropdown = event.currentTarget.querySelector('.dropdown-content')
+      // Pequeño retraso para permitir hacer clic en los enlaces
+      setTimeout(() => {
+        dropdown.style.display = 'none'
+      }, 200)
+    },
+    closeAllDropdowns() {
+      document.querySelectorAll('.dropdown-content').forEach(dropdown => {
+        dropdown.style.display = 'none'
+      })
+    }
+  }
+}
+</script>
+
 
 <script setup>
 import { handleLogout } from './src/services/authService'

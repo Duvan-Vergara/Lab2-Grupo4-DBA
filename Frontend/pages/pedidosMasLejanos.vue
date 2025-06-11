@@ -1,8 +1,12 @@
 <template>
-  <div class="text-center my-8">
-    <h1>Pedidos más lejanos por empresa</h1>
+  <div class="container">
+    <h1 class="title text-center">Pedidos más lejanos por empresa</h1>
     
-    <button @click="obtenerPedidosLejanos">Obtener pedidos lejanos</button>
+    <div class="mt-4 text-center">
+      <button @click="obtenerPedidosLejanos">
+        Obtener pedidos lejanos
+      </button>
+    </div>
 
     <div v-if="cargando">
       <p>Cargando datos...</p>
@@ -12,7 +16,7 @@
       <p>Error: {{ error }}</p>
     </div>
 
-    <table v-if="pedidos.length > 0" class="mx-auto">
+    <table class="table">
       <thead>
         <tr>
           <th>Empresa</th>
@@ -28,6 +32,7 @@
         </tr>
       </tbody>
     </table>
+
   </div>
 </template>
 

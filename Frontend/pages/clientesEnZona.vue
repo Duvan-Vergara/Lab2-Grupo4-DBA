@@ -1,8 +1,8 @@
 <template>
   <div class="text-center my-8">
-    <h1>Verificación de clientes en zona</h1>
+    <h1 class="title">Verificación de clientes en zona</h1>
     
-    <div>
+    <div class="mt-4">
       <input 
         type="number" 
         v-model.number="idZona" 
@@ -20,33 +20,26 @@
       <p class="error">{{ error }}</p>
     </div>
 
-    <div v-if="clientes.length > 0">
-      <h2>Resultados para zona {{ idZona }}</h2>
-      <p>Total clientes: {{ clientes.length }}</p>
-      <p>Clientes dentro de zona: {{ clientesDentro }}</p>
-      <p>Clientes fuera de zona: {{ clientesFuera }}</p>
-      
-      <table class="mx-auto">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Estado</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr 
-            v-for="cliente in clientes" 
-            :key="cliente.id_cliente"
-            :class="{ 'dentro-zona': cliente.estado === 'Dentro de la zona' }"
-          >
-            <td>{{ cliente.id_cliente }}</td>
-            <td>{{ cliente.nombre }}</td>
-            <td>{{ cliente.estado }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr 
+          v-for="cliente in clientes" 
+          :key="cliente.id_cliente"
+          :class="{ 'dentro-zona': cliente.estado === 'Dentro de la zona' }"
+        >
+          <td>{{ cliente.id_cliente }}</td>
+          <td>{{ cliente.nombre }}</td>
+          <td>{{ cliente.estado }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 

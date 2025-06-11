@@ -1,8 +1,8 @@
 <template>
   <div class="text-center my-8">
-    <h1>Zonas de alta densidad</h1>
+    <h1 class="title">Zonas de alta densidad</h1>
     
-    <button @click="obtenerZonasAltaDensidad">Obtener zonas de alta densidad</button>
+    <button @click="obtenerZonasAltaDensidad" class="mt-4">Obtener zonas de alta densidad</button>
 
     <div v-if="cargando">
       <p>Cargando datos...</p>
@@ -12,7 +12,7 @@
       <p>Error: {{ error }}</p>
     </div>
 
-    <table v-if="zonas.length > 0" class="mx-auto">
+    <table class="table">
       <thead>
         <tr>
           <th>ID Zona</th>

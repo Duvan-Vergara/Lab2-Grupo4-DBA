@@ -1,8 +1,8 @@
 <template>
   <div class="text-center my-8">
-    <h1>Clientes sin empresa cercana</h1>
+    <h1 class="title">Clientes sin empresa cercana</h1>
     
-    <button @click="obtenerClientesSinCobertura">Obtener clientes</button>
+    <button @click="obtenerClientesSinCobertura" class="mt-4">Obtener clientes</button>
 
     <div v-if="cargando">
       <p>Cargando datos...</p>

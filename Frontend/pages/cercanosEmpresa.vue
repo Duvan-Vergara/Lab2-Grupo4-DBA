@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <h1 class="title">Lista de los 5 puntos más cercanos a una empresa</h1>
+        <h1 class="title text-center">Lista de los 5 puntos más cercanos a una empresa</h1>
     
-        <div class="search">
+        <div class="search mt-4 text-center">
             <input
                 type="text"
                 v-model="idEmpresa"

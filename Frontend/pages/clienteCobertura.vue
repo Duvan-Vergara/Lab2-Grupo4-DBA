@@ -1,8 +1,8 @@
 <template>
   <div class="text-center my-8">
-    <h1>Verificar Zona de Cobertura</h1>
+    <h1 class="title">Verificar Zona de Cobertura</h1>
     
-    <div>
+    <div class="mt-4">
       <input
         type="number"
         v-model.number="idCliente"

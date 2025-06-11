@@ -1,5 +1,5 @@
 <template>
-    <div class="container mt-5">
+    <div class="container">
         <form @submit.prevent="handleRegister" class="form-register">
             <h1 class="h3 mb-3 fw-normal text-center">Registro</h1>
             <div class="form-floating mb-3">
