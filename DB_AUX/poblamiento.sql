@@ -193,6 +193,15 @@ INSERT INTO PEDIDO_PRODUCTO (id_pedido, id_producto_servicio, cantidad) VALUES
 (10, 2, 3);
 
 
+INSERT INTO PUNTO_INTERES (nombre, tipo, ubicacion) VALUES
+('Hospital Clínico Universidad de Chile', 'hospital', ST_GeogFromText('SRID=4326;POINT(-70.6536 -33.4314)')),
+('Hospital Sótero del Río', 'hospital', ST_GeogFromText('SRID=4326;POINT(-70.5762 -33.5096)')),
+('Centro Logístico Entregas Ya', 'centro_logistico', ST_GeogFromText('SRID=4326;POINT(-70.6995 -33.6250)')),
+('Centro Logístico KargoGo', 'centro_logistico', ST_GeogFromText('SRID=4326;POINT(-70.7405 -33.3695)')),
+('Hospital El Pino', 'hospital', ST_GeogFromText('SRID=4326;POINT(-70.6814 -33.5620)'));
+
+
+
 
 UPDATE DETALLE_PEDIDO
 SET    calificacion = CASE id_detalle_pedido

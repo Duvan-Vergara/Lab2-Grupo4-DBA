@@ -97,4 +97,11 @@ public class PedidoController {
         List<Map<String, Object>> pedidos = pedidoService.obtenerPedidosMasCercanosAEmpresa(idEmpresa);
         return ResponseEntity.ok(pedidos);
     }
+
+    @GetMapping("/cercanos")
+    public List<Map<String, Object>> obtenerPuntosCercanos(
+            @RequestParam Long idCliente,
+            @RequestParam(defaultValue = "1000") double radio) {
+        return pedidoService.obtenerPuntosInteres(idCliente, radio);
+    }
 }

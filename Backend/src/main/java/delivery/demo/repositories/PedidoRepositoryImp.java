@@ -162,5 +162,42 @@ public class PedidoRepositoryImp {
         }
     }
 
+    //EXTRA 3
+    public List<Map<String, Object>> obtenerPuntosInteresCercanosPorCliente(Long idCliente, double radioMetros) {
+        String sql = """
+        SELECT 
+          poi.id,
+          poi.nombre,
+          poi.tipo,
+          ST_Distance(
+            poi.ubicacion,
+            geography(ST_Transform(c.ubicacion_cliente, 4326))
+          ) AS distancia_metros
+        FROM 
+          cliente c
+        JOIN 
+          punto_interes poi ON TRUE
+        WHERE 
+          c.id_cliente = :idCliente
+          AND ST_DWithin(
+                poi.ubicacion,
+                geography(ST_Transform(c.ubicacion_cliente, 4326)),
+                :radio
+              )
+        ORDER BY 
+          distancia_metros
+        LIMIT 5;
+    """;
+
+        try (org.sql2o.Connection con = sql2o.open()) {
+            return con.createQuery(sql)
+                    .addParameter("idCliente", idCliente)
+                    .addParameter("radio", radioMetros)
+                    .executeAndFetchTable()
+                    .asList();
+        }
+    }
+
+
 
 }

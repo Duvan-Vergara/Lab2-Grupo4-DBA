@@ -103,4 +103,9 @@ public class PedidoService {
     public List<Map<String, Object>> obtenerPedidosMasCercanosAEmpresa(Long idEmpresa) {
         return pedidoRepositoryImp.obtenerPedidosMasCercanosAEmpresa(idEmpresa);
     }
+
+    public List<Map<String, Object>> obtenerPuntosInteres(Long idCliente, double radioMetros){
+        return pedidoRepositoryImp.obtenerPuntosInteresCercanosPorCliente(idCliente, radioMetros);
+    }
+
 }

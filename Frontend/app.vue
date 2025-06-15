@@ -37,6 +37,8 @@
             <nuxt-link to="/cercanosEmpresa" @click="closeAllDropdowns">Cercanos Empresa</nuxt-link>
             <nuxt-link to="/pedidosMasLejanos" @click="closeAllDropdowns">Pedidos Lejanos</nuxt-link>
             <nuxt-link to="/zonaDensa" @click="closeAllDropdowns">Zona Densa</nuxt-link>
+            <nuxt-link to="/puntoInteres" @click="closeAllDropdowns">Puntos de Interés</nuxt-link>
+
           </div>
         </div>
       </nav>
